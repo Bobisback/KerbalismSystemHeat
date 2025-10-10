@@ -1,12 +1,7 @@
 ﻿using System;
-using UnityEngine;
 using KSP.Localization;
-// Kerbalism namespaces (same as ProcessController)
 using KERBALISM;
 using SystemHeat;
-using System.Reflection;
-using static GameEvents;
-using static VehiclePhysics.EnergyProvider;
 
 namespace KerbalismSystemHeat
 {
@@ -22,20 +17,8 @@ namespace KerbalismSystemHeat
         // Efficiency vs loop temperature (mirrors SystemHeat converter behavior)
         [KSPField(isPersistant = false)] public FloatCurve systemEfficiency = new FloatCurve();
 
-        // Crew/bonus parity (editor info + optional scaling)
         [KSPField(isPersistant = false)] public bool AutoShutdown = true;
         [KSPField(isPersistant = false)] public bool GeneratesHeat = false;
-        [KSPField(isPersistant = false)] public bool UseSpecialistBonus = false;
-        [KSPField(isPersistant = false)] public float SpecialistEfficiencyFactor = 0f;
-        [KSPField(isPersistant = false)] public float SpecialistBonusBase = 0f;
-        [KSPField(isPersistant = false)] public bool UseSpecialistHeatBonus = false;
-        [KSPField(isPersistant = false)] public float SpecialistHeatFactor = 0f;
-        [KSPField(isPersistant = false)] public string ExperienceEffect = "";
-        [KSPField(isPersistant = false)] public float EfficiencyBonus = 0f;
-
-        // If on, shows in editor thermal sims
-        [KSPField(isPersistant = true)]
-        public bool editorThermalSim = false;
 
         // Current efficiency GUI string
         [KSPField(isPersistant = false, guiActive = true, guiActiveEditor = true, guiName = "Efficiency: -1%", groupName = "Process", groupDisplayName = "Process Info")]
@@ -80,9 +63,6 @@ namespace KerbalismSystemHeat
 
             //Events["ConverterEfficiency"].active = IsRunning();
             Fields[nameof(ConverterOfEfficiency)].guiName = Localizer.Format("#LOC_SystemHeat_ModuleSystemHeatConverter_Field_Efficiency", title);
-
-            //pseudoResource = part.Resources[resource];
-            //pseudoResource.maxAmount = capacity * 1.5;
         }
 
         public override void Configure(bool enable, int multiplier)
