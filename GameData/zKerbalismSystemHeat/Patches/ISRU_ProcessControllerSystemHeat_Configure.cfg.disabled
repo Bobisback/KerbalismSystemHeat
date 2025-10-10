@@ -1,0 +1,13 @@
+@PART[ISRU]:NEEDS[Kerbalism,SystemHeat,KerbalismSystemHeat]:FINAL
+{
+  @MODULE[Configure]
+  {
+    @SETUP,*
+    {
+      @MODULE,*
+      {
+        @type = ProcessControllerSystemHeat
+      }
+    }
+  }
+}
