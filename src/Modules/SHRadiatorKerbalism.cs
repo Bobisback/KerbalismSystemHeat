@@ -14,9 +14,6 @@ namespace KerbalismSystemHeat
 		[KSPField(isPersistant = true)]
 		public float scaleEmissionPower = 2f;
 
-		[KSPField(isPersistant = false)]
-		public FloatCurve refTemperatureCurve = new FloatCurve();
-
 		public static string radiatorTitle = Localizer.Format("#LOC_KerbalismSystemHeat_Radiator");
 
 		public List<ModuleResource> inputResourcesClone;
@@ -25,7 +22,6 @@ namespace KerbalismSystemHeat
 		{
 			base.OnLoad(node);
 			inputResourcesClone = resHandler.inputResources.ConvertAll(p => p);
-			refTemperatureCurve.Load(node.GetNode("temperatureCurve"));
 		}
 
 		// Tweakscale support
@@ -34,9 +30,9 @@ namespace KerbalismSystemHeat
 		{
 			scale = data.Get<float>("factorAbsolute");
 			temperatureCurve = new FloatCurve();
-			for (int i = 0; i < refTemperatureCurve.Curve.length; i++)
+			for (int i = 0; i < temperatureCurve.Curve.length; i++)
 			{
-				temperatureCurve.Add(refTemperatureCurve.Curve.keys[i].time, refTemperatureCurve.Curve.keys[i].value * (float) Math.Pow(scale, scaleEmissionPower));
+				temperatureCurve.Add(temperatureCurve.Curve.keys[i].time, temperatureCurve.Curve.keys[i].value * (float) Math.Pow(scale, scaleEmissionPower));
 			}
 		}
 

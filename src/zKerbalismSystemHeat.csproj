@@ -93,7 +93,6 @@
   <ItemGroup>
     <Compile Include="DetectKerbalism.cs" />
     <Compile Include="Modules\ProcessControllerSystemHeat.cs" />
-    <Compile Include="Modules\SHConverterKerbalism.cs" />
     <Compile Include="Modules\SHFissionEngineKerbalismUpdater.cs" />
     <Compile Include="Modules\SHFissionReactorKerbalismUpdater.cs" />
     <Compile Include="Modules\SHHarvesterKerbalism.cs" />
