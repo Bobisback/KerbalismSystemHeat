@@ -61,7 +61,7 @@ namespace KerbalismSystemHeat
             // Find ModuleSystemHeat with matching moduleID
             heatModule = ModuleUtils.FindHeatModule(this.part, systemHeatModuleID);
 
-            //Events["ConverterEfficiency"].active = IsRunning();
+            //Display Efficiency on the UI
             Fields[nameof(ConverterOfEfficiency)].guiName = Localizer.Format("#LOC_SystemHeat_ModuleSystemHeatConverter_Field_Efficiency", title);
         }
 
@@ -69,6 +69,13 @@ namespace KerbalismSystemHeat
         {
             configuredCapacity = capacity * multiplier;
             base.Configure(enable, multiplier);
+
+            if (!enable)
+            {
+                SetRunning(false);
+                if (heatModule)
+                    heatModule.AddFlux(resource, 0f, 0f, false);
+            }
         }
 
         // KSP FixedUpdate for flight-time heat emission
@@ -104,6 +111,7 @@ namespace KerbalismSystemHeat
                     heatModule.AddFlux(resource, 0f, 0f, false);
             }
         }
+
         protected void GenerateHeatFlight()
         {            
             if (ModuleIsActive())
