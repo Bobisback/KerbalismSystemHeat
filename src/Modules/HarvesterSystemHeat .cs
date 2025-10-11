@@ -79,6 +79,17 @@ namespace KerbalismSystemHeat
         {
             if (heatModule != null)
             {
+                // Auto-shutdown guard
+                if (AutoShutdown && heatModule.currentLoopTemperature >= shutdownTemperature)
+                {
+                    if (running)
+                    {
+                        DisableModule();
+                    }
+                    heatModule.AddFlux(resource, 0f, 0f, false);
+                    return;
+                }
+
                 if (ModuleIsActive())
                     heatModule.AddFlux(resource, systemOutletTemperature, systemPower, true);
                 else
