@@ -106,7 +106,7 @@ namespace KerbalismSystemHeat
             if (heatModule)
             {
                 if (IsRunning())
-                    heatModule.AddFlux(resource, systemOutletTemperature, systemPower, true);
+                    heatModule.AddFlux(resource, systemOutletTemperature, systemPower * lastMultiplier, true);
                 else
                     heatModule.AddFlux(resource, 0f, 0f, false);
             }
@@ -121,7 +121,7 @@ namespace KerbalismSystemHeat
                 {
                     fluxScale = 0f;
                 }
-                heatModule.AddFlux(resource, systemOutletTemperature, systemPower * fluxScale, true);
+                heatModule.AddFlux(resource, systemOutletTemperature, systemPower * fluxScale * lastMultiplier, true);
             }
             else
             {
